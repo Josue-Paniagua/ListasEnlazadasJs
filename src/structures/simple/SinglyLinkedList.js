@@ -54,25 +54,70 @@ class SinglyLinkedList {
   }
 
   countOccurrences(value) {
-    throw new Error(
-      "TODO RETO: Implementar countOccurrences(value) en SinglyLinkedList."
-    );
+    let count = 0;
+	let current = this.head;
+	
+	while(current !== null){
+		if(this._isSameValue(current.value, value)){
+			count++;
+		}
+		current = current.next;
+	}
+	return count;
   }
 
   clean() {
-    throw new Error("TODO RETO: Implementar clean() en SinglyLinkedList.");
+	let count = 0;
+	let current = this.head;
+	
+	while(current !== null){
+		
+	let next = current.next;
+	current.next = null;
+	current = next;
+	count++;
+	}
+	this.head = null;
+	this.tail = null;
+	this._size= 0;
+	return count;
   }
 
   reverseInPlace() {
-    throw new Error(
-      "TODO RETO: Implementar reverseInPlace() en SinglyLinkedList."
-    );
+	let prev = null;
+	let current = this.head;
+	let next = null;
+	
+	this.tail =  this.head;
+	
+	while ( current !== null){
+		next = current.next;
+		current.next = prev;
+		prev = current;
+		current = next;
+	}
+    this.head = prev; 
   }
 
   removeDuplicates() {
-    throw new Error(
-      "TODO RETO: Implementar removeDuplicates() en SinglyLinkedList."
-    );
+    let eliminados = 0;
+	let current = this.head;
+	
+	while( current !== null){
+		let buscador = current;
+		
+		while(buscador.next !== null){
+			if(buscador.next.value === current.value){
+				buscador.next = buscador.next.next;
+				eliminados++;
+				this._size--;
+			}else{
+				buscador = buscador.next;
+			}
+		}
+		current = current.next;
+	}
+	return eliminados;
   }
 
   size() {
