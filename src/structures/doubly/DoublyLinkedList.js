@@ -75,13 +75,34 @@ class DoublyLinkedList {
   }
 
   countOccurrences(value) {
-    throw new Error(
-      "TODO RETO: Implementar countOccurrences(value) en DoublyLinkedList."
-    );
+    let count = 0;
+	let current = this.head;
+	
+	while(current !== null){
+		if (this._isSameValue(current.value, value)){
+			count++;
+			
+		}
+		current= current.next;
+	}
+	return count;
   }
 
   clean() {
-    throw new Error("TODO RETO: Implementar clean() en DoublyLinkedList.");
+	let count = 0;
+	let current = this.head;
+	
+	while(current !== null){
+		let next = current.next;
+		current.next = null;
+		current.previous = null;
+		current = next;
+		count++;
+	}
+	this.head = null;
+	this.tail = null;
+	this._size = 0;
+	return count;
   }
 
   reverseInPlace() {
