@@ -106,15 +106,51 @@ class DoublyLinkedList {
   }
 
   reverseInPlace() {
-    throw new Error(
-      "TODO RETO: Implementar reverseInPlace() en DoublyLinkedList."
-    );
+    let prev = null;
+	let next = null;
+	let current = this.head;
+	
+	this.tail = this.head;
+	while ( current !== null){
+		next = current.next;
+		current.next = prev;
+		current.previous = next;
+		prev = current;
+		current = next;
+	}
+	this.head = prev;
   }
 
   removeDuplicates() {
-    throw new Error(
-      "TODO RETO: Implementar removeDuplicates() en DoublyLinkedList."
-    );
+    let eliminados = 0;
+	let current = this.head;
+	while (current !== null){
+		let buscador = current;
+		
+		while (buscador.next !== null){
+			
+			if(buscador.next.value === current.value){
+				let nodoAeliminar = buscador.next;
+				buscador.next = nodoAeliminar.next;
+				
+				if ( nodoAeliminar.next !== null){
+					nodoAeliminar.next.previous = buscador;
+					
+				}else{
+					this.tail = buscador;
+					
+				}
+				
+				eliminados++;
+				this._size--;
+			}
+				else{
+					buscador = buscador.next;
+				}
+		}
+		current = current.next
+	}
+	return eliminados; 
   }
 
   size() {
